@@ -4,6 +4,9 @@ from rest_framework import status, permissions
 from IamCodeAddicted_Base.models import Movie, MoviesPurchase
 from .serializers import MoviesSerializer, MoviePurchaseSerializer
 from datetime import  datetime
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 class MoviesPurchaseApiView(APIView):
@@ -161,3 +164,12 @@ class UserMovieDetail(APIView):
             {"res":"Object deleted"},
             status=status.HTTP_200_OK
         )
+
+
+# auth section!!!
+class HelloView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        content = {'message': 'Hello, World!'}
+        return Response(content)
