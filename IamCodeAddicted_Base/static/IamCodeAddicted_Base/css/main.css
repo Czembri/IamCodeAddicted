@@ -17,3 +17,11 @@ a:hover {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
 }
+
+.no-m-card {
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    bottom: 5px;
+    height: 40px;
+}

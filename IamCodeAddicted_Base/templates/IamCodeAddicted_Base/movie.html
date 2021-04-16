@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block app %}
+
+<div class="row justify-content-center">
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ movie.image_url }}" alt="{{ movie.title }}" style="height: 400px;">
+    <div class="card-body">
+        <a href="{% url 'movie' movie.id %}"><h6 class="card-title">{{ movie.name }}</h6></a>
+        <p class="card-text">{{ movie.description}}</p>
+        <a href="#" class="btn btn-secondary">Kup bilet</a>
+    </div>
+  </div>
+</div>
+
+
+
+  {% endblock %}

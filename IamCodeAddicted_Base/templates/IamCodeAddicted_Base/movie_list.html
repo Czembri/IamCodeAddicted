@@ -7,9 +7,12 @@
 <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="{{ movie.image_url }}" alt="{{ movie.title }}" style="height: 400px;">
     <div class="card-body">
-      <a href="#"><h5 class="card-title">{{ movie.name }}</h5></a>
-      <p class="card-text">{{ movie.description }}</p>
-      <a href="#" class="btn btn-secondary">Kup bilet</a>
+      <a href="{% url 'movie' movie.id %}"><h6 class="card-title">{{ movie.name }}</h6></a>
+      <p class="card-text" style="height: 50px;">{{ movie.description|slice:":20" }}...</p>
+      <div class="no-m-card">
+        <a href="#" class="btn btn-secondary">Kup bilet</a>
+        <a href="{% url 'movie' movie.id %}" class="btn btn-secondary">Zobacz szczegóły</a>
+      </div>
     </div>
   </div>
   {% empty %}
