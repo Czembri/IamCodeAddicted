@@ -21,10 +21,10 @@ class Movie(models.Model):
 
 class MoviesPurchase(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=False
+        User, related_name="users",on_delete=models.CASCADE, null=False
     )
     movie = models.ForeignKey(
-        Movie, on_delete=models.CASCADE, null=False
+        Movie, related_name="movies",on_delete=models.CASCADE, null=False
     )
     date_of_purchase = models.DateTimeField(auto_now_add=True)
     

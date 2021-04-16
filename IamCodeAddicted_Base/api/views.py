@@ -21,6 +21,21 @@ class MoviesPurchaseApiView(APIView):
         serializer = MoviePurchaseSerializer(user_purchase, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    
+    def post(self, request, *args, **kwargs):
+        data = {
+            'date_of_purchase': request.data.get('date_of_purchase'),
+            'movie':request.data.get('movie_id'),
+            'user':request.user.id
+        }
+
+        serializer = MoviePurchaseSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.errors, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+    
 
 class MoviePurchaseUserApi(APIView):
     permissions_classes = [permissions.IsAuthenticated]
@@ -35,20 +50,6 @@ class MoviePurchaseUserApi(APIView):
             )
         serializer = MoviePurchaseSerializer(user_purchase)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-    def post(self, request, movie_id,*args, **kwargs):
-        data = {
-            'date_of_purchase': datetime.now(),
-            'movie_id': movie_id,
-            'user_id':request.user.id
-        }
-
-        serializer = MoviePurchaseSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.errors, status=status.HTTP_201_CREATED)
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 
     def delete(self, request, movie_id, *args, **kwargs):
