@@ -7,6 +7,9 @@ class Movie(models.Model):
     description = models.CharField(max_length=10000)
     date_of_release = models.DateTimeField()
     image_url = models.URLField(max_length=300)
+    added_by = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True
+    )
 
     def __str__(self):
         return f'You are about to hit: {self.name}'
@@ -18,7 +21,7 @@ class Movie(models.Model):
 
 class MoviesPurchase(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True
+        User, on_delete=models.CASCADE, null=False
     )
     movie = models.ForeignKey(
         Movie, on_delete=models.CASCADE, null=False

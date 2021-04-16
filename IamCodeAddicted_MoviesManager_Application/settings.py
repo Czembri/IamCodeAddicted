@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'IamCodeAddicted_Base.apps.IamcodeaddictedBaseConfig'
+    'IamCodeAddicted_Base.apps.IamcodeaddictedBaseConfig',
+    'django_extensions',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
