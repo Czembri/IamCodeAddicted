@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block app %}
+
+<div class="row justify-content-center">
+  {% for movie in movies %}
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ movie.image_url }}" alt="{{ movie.title }}" style="height: 400px;">
+    <div class="card-body">
+      <a href="#"><h5 class="card-title">{{ movie.name }}</h5></a>
+      <p class="card-text">{{ movie.description }}</p>
+      <a href="#" class="btn btn-secondary">Kup bilet</a>
+    </div>
+  </div>
+  {% empty %}
+  <h3>Brak elementów do wyświetlenia</h3>
+  {% endfor %}
+</div>
+
+
+
+  {% endblock %}
