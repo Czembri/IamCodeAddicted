@@ -1,12 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from IamCodeAddicted_Base.models import Movie, MoviesPurchase
-from .serializers import MoviesSerializer, MoviePurchaseSerializer
+from IamCodeAddicted_Base.models import Movie, MoviesPurchase, CustomUser
+from .serializers import MoviesSerializer, MoviePurchaseSerializer, RegisterUserSerializer, UserLoginSerializer
 from datetime import  datetime
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 class MoviesPurchaseApiView(APIView):
@@ -14,7 +13,9 @@ class MoviesPurchaseApiView(APIView):
 
 
     def get(self, request,*args, **kwargs):
-        user_purchase = MoviesPurchase.objects.all().filter(user_id=request.user.id)
+        print(request.user.id)
+        user_purchase = MoviesPurchase.objects.filter(user_id=request.user.id)
+        print(user_purchase)
         if not user_purchase:
             return Response(
                 {"res":"Object does not exist or is not accessible"},
@@ -26,16 +27,23 @@ class MoviesPurchaseApiView(APIView):
 
     
     def post(self, request, *args, **kwargs):
+        permissions_classes = [permissions.IsAuthenticated]
         data = {
-            'date_of_purchase': request.data.get('date_of_purchase'),
-            'movie':request.data.get('movie_id'),
+            'date_of_purchase':request.data.get('date_of_purchase'),
+            'movie':request.data.get('movie'),
             'user':request.user.id
         }
-
+        movies = Movie.objects.get(id=data['movie'])
+        data['movies'] = movies.__dict__
+        print(data)
         serializer = MoviePurchaseSerializer(data=data)
+        print(serializer)
+        print(serializer.is_valid())
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.errors, status=status.HTTP_201_CREATED)
+            print(serializer.validated_data)
+            if serializer.validated_data:
+                serializer.save()
+                return Response(serializer.errors, status=status.HTTP_201_CREATED)
         
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     
@@ -85,6 +93,8 @@ class MoviesListApiView(APIView):
             'description':request.data.get('description'),
             'date_of_release':request.data.get('date_of_release'),
             'image_url':request.data.get('image_url'),
+            'price':request.data.get('price'),
+            'rating':request.data.get('rating'),
             'added_by':request.user.id
 
         }
@@ -173,3 +183,41 @@ class HelloView(APIView):
     def get(self, request):
         content = {'message': 'Hello, World!'}
         return Response(content)
+
+
+
+class CustomUserCreate(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        reg_serializer = RegisterUserSerializer(data=request.data)
+        data = {}
+        if reg_serializer.is_valid():
+            newuser = reg_serializer.save()
+            if newuser:
+                data['response'] = "Successfully registered a new user"
+                data['email'] = newuser.email
+                data['username'] = newuser.username
+                return Response(status=status.HTTP_201_CREATED)
+            else:
+                data = serializer.errors
+        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserLoginView(APIView):
+
+    permission_classes = (AllowAny,)
+    serializer_class = UserLoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        response = {
+            'success' : 'True',
+            'status code' : status.HTTP_200_OK,
+            'message': 'User logged in  successfully',
+            'token' : serializer.data['token'],
+            }
+        status_code = status.HTTP_200_OK
+
+        return Response(response, status=status_code)

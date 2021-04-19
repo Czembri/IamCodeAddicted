@@ -3,23 +3,89 @@
 {% block app %}
 
 <div class="row justify-content-center">
-  {% for movie in movies %}
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{ movie.image_url }}" alt="{{ movie.title }}" style="height: 400px;">
-    <div class="card-body">
-      <a href="{% url 'movie' movie.id %}"><h6 class="card-title">{{ movie.name }}</h6></a>
-      <p class="card-text" style="height: 50px;">{{ movie.description|slice:":20" }}...</p>
-      <div class="no-m-card">
-        <a href="#" class="btn btn-secondary">Kup bilet</a>
-        <a href="{% url 'movie' movie.id %}" class="btn btn-secondary">Zobacz szczegóły</a>
-      </div>
-    </div>
-  </div>
-  {% empty %}
-  <h3>Brak elementów do wyświetlenia</h3>
-  {% endfor %}
 </div>
 
 
 
   {% endblock %}
+
+  {% block scripts %}
+<script>
+    // fetch('/api/').then((resp)=>{
+    //   resp.json().then((data)=>{
+    //     $('.row').empty();
+    //         for (let movie of data){
+    //             $('.row').append(`
+    //             <div class="card" style="width: 18rem;">
+    //               <img class="card-img-top" src="${ movie['image_url'] }" alt="${movie['title']}" style="height: 400px;">
+    //               <div class="card-body">
+    //                 <a href="/movie/${movie['id']}/"><h6 class="card-title">${movie['name']}</h6></a>
+    //                 <p class="card-text" style="height: 50px;">${movie['description'].slice(0,20)}...</p>
+    //                 <div class="no-m-card">
+    //                   <a href="#" class="btn btn-secondary">Kup bilet</a>
+    //                   <a href="/movie/${movie['id']}/" class="btn btn-secondary">Zobacz szczegóły</a>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //             `);
+    //         }
+    //   })
+    // })
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    $.ajax({
+          url: "/api/",
+          type: 'GET',
+          // Fetch the stored token from localStorage and set in the header
+          headers: {Authorization: 'Bearer ' + getCookie('jwt_token')},
+          dataType: 'json',
+          success: function(data){
+            $('.row').empty();
+            for (let movie of data){
+                $('.row').append(`
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="${ movie['image_url'] }" alt="${movie['title']}" style="height: 400px;">
+                  <div class="card-body" style="height: fit-content;">
+                    <a href="/movie/${movie['id']}/"><h6 class="card-title">${movie['name']}</h6></a>
+                    <p class="card-text" style="height: 30px;">${movie['description'].slice(0,20)}...</p>
+                    <p style="height: 50px;">Cena: ${movie['price']},-/ Ocena: ${movie['rating']}</p>
+                    <div class="no-m-card">
+                      <a href="#" class="btn btn-secondary">Kup bilet</a>
+                      <a href="/movie/${movie['id']}/" class="btn btn-secondary">Zobacz szczegóły</a>
+                    </div>
+                  </div>
+                </div>
+                `);
+            }
+          }
+        });
+    // $.get(url, function(data) {
+    //     setTimeout(fetchMovies, 500);
+    //     function fetchMovies() {
+    //         $('.card').empty();
+    //         for (let movie of data){
+    //             $('.card').append(`
+    //             <img class="card-img-top" src="${ movie['image_url'] }" alt="${movie['title']}" style="height: 400px;">
+    //             <div class="card-body">
+    //               <a href="/movie/${movie['id']}/"><h6 class="card-title">${movie['name']}</h6></a>
+    //               <p class="card-text" style="height: 50px;">${movie['description']}...</p>
+    //               <div class="no-m-card">
+    //                 <a href="#" class="btn btn-secondary">Kup bilet</a>
+    //                 <a href="/movie/${movie['id']}/" class="btn btn-secondary">Zobacz szczegóły</a>
+    //               </div>
+    //             </div>
+    //             `);
+    //         }
+    //     }
+    // });
+</script>
+{% endblock %}

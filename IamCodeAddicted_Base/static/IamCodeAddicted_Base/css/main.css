@@ -25,3 +25,7 @@ a:hover {
     bottom: 5px;
     height: 40px;
 }
+
+.close-btn {
+    cursor: pointer;
+}
