@@ -64,7 +64,6 @@ $('#buy').on('click' ,function(e) {
       type: "POST",
       url: "/api/purchase/",
       headers: {Authorization: 'Bearer ' + getCookie('jwt_token')},
-      // The key needs to match your method's input parameter (case-sensitive).
       data: {
         "user": user,
         "movie": movie_id,

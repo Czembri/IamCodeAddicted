@@ -6,6 +6,9 @@ from .serializers import MoviesSerializer, MoviePurchaseSerializer, RegisterUser
 from datetime import  datetime
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class MoviesPurchaseApiView(APIView):
@@ -13,9 +16,8 @@ class MoviesPurchaseApiView(APIView):
 
 
     def get(self, request,*args, **kwargs):
-        print(request.user.id)
         user_purchase = MoviesPurchase.objects.filter(user_id=request.user.id)
-        print(user_purchase)
+        logger.debug(f'Database query result: [{user_purchase}]')
         if not user_purchase:
             return Response(
                 {"res":"Object does not exist or is not accessible"},
@@ -35,12 +37,11 @@ class MoviesPurchaseApiView(APIView):
         }
         movies = Movie.objects.get(id=data['movie'])
         data['movies'] = movies.__dict__
-        print(data)
+        logger.debug(f'Data: [{data}]')
         serializer = MoviePurchaseSerializer(data=data)
-        print(serializer)
-        print(serializer.is_valid())
+        logger.debug(f'Serializer: [{serializer}]; IS_VALID: [{serializer.is_valid()}]')
         if serializer.is_valid():
-            print(serializer.validated_data)
+            logger.debug(f'DATA_VALIDATED: [{serializer.validated_data}]')
             if serializer.validated_data:
                 serializer.save()
                 return Response(serializer.errors, status=status.HTTP_201_CREATED)
