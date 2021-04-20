@@ -39,6 +39,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+     <li><a href="#endpoints">Endopints</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -135,6 +136,52 @@ You need to have installed python 3.8 > and postgres database (better for you to
 ![GetJWT2](https://user-images.githubusercontent.com/57504533/115380141-8fa39a80-a1d2-11eb-8446-784fa0cc75b8.png "jwt2")
 ![GetJWT3](https://user-images.githubusercontent.com/57504533/115380173-99c59900-a1d2-11eb-8264-a5ee7f27b050.png "jwt3")
 
+
+## Endpoints
+[ API ]
+
+### register user
+
+method: POST
+/api/register/
+
+
+### get JWT Token
+
+method: POST
+/api/login/ or /api/token/
+refresh token: /api/refresh/
+
+
+### get list of movie, create movie
+
+method: GET
+/api/
+
+method: POST
+/api/
+
+
+### get list of bought tickets, buy a ticket, delete a ticket
+
+method: GET
+/api/purchase/
+
+method: POST
+/api/purchase/<int:movie_id>
+
+method: DELETE
+/api/purchase/<int:movie_id>
+
+
+[ APP ]
+
+'/' - main page
+'/login/' - login page 
+'/register/' -register page
+'/logout/' - session cleared, logout page
+'/bought/' - bought tickets
+'/movie/<int:pk>/' - movie details
 
 <!-- ROADMAP -->
 ## Roadmap
