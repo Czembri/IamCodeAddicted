@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block app %}
+<div class="row justify-content-center" style="margin-top: 100px;">
+    <div class="col d-flex justify-content-center">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="submit">Register</button>
+          </form>
+        <!-- <form id="reg" action=" {% url 'register' %">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username">
+              </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button id="sub" type="submit" class="btn btn-primary">Submit</button>
+          </form> -->
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+</script>
+{% endblock %}

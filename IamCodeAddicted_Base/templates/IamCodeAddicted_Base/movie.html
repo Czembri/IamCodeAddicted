@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block app %}
+
+<div class="row justify-content-center">
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ movie.image_url }}" alt="{{ movie.title }}" style="height: 400px;">
+    <div class="card-body">
+        <a href="{% url 'movie' movie.id %}"><h6 class="card-title">{{ movie.name }}</h6></a>
+        <p class="card-text">{{ movie.description}}</p>
+        <button class="btn btn-secondary" id="show-modal">Kup bilet</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tak dla pewności!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>Na pewno chcesz kupić ten bilet?</h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="buy" type="button" class="btn btn-primary">Kup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  $('#show-modal').on('click', function(){
+      $('.modal').modal('show');
+  });
+</script>
+<script>
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+
+var user = '{{ request.user.id }}'
+var movie_id = '{{ movie.id }}'
+
+$('#buy').on('click' ,function(e) { 
+  e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/api/purchase/",
+      headers: {Authorization: 'Bearer ' + getCookie('jwt_token')},
+      data: {
+        "user": user,
+        "movie": movie_id,
+        "csrfmiddlewaretoken": "{{ csrf_token }}"
+      },
+      dataType: "json",
+      success: function(data){ console.log('success' + data) },
+      error: function(errMsg) {
+          console.log(errMsg);
+      },
+      complete:function(xhr, textStatus){
+        if (xhr.status == 500){
+          alert("Już to kupiłeś głąbie!");
+        }
+      }
+  });
+})
+</script>
+  {% endblock %}

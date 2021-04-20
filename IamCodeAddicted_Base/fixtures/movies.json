@@ -1,0 +1,82 @@
+
+[
+        {
+            "model":"IamCodeAddicted_Base.movie",
+            "pk" : 1,
+            "fields":{
+                "name" : "IRON MAN",
+                "description" : "Tony Stark buduje supernowoczesną zbroję. Multimiliarder postanawia walczyć ze złem jako Iron Man.",
+                "date_of_release" : "2021-04-16T12:32:36.171Z",
+                "image_url" : "https:\/\/fwcdn.pl\/fpo\/25\/41\/122541\/7885686.3.jpg",
+                "added_by_id" : null,
+                "price" : 19.0,
+                "rating" : 5.0
+            }
+        },
+        {
+            "model":"IamCodeAddicted_Base.movie",
+            "pk" : 2,
+            "fields":{
+                "name" : "AVENGERS",
+                "description" : "Grupa superbohaterów, na czele z Thorem, Iron Manem i Hulkiem, łączy siły, by obronić Ziemię przed inwazją kosmitów.",
+                "date_of_release" : "2021-05-11T19:00:00.000Z",
+                "image_url" : "https:\/\/m.media-amazon.com\/images\/M\/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+                "added_by_id" : null,
+                "price" : 19.0,
+                "rating" : 5.0
+            }
+        },
+        {
+            "model":"IamCodeAddicted_Base.movie",
+            "pk" : 3,
+            "fields":{
+                "name" : "AVENGERS: CZAS ULTRONA",
+                "description" : "Najpotężniejsi bohaterowie na Ziemi łączą swoje siły, aby zniszczyć Ultrona.",
+                "date_of_release" : "2021-06-17T20:00:00.000Z",
+                "image_url" : "https:\/\/m.media-amazon.com\/images\/M\/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+                "added_by_id" : null,
+                "price" : 19.0,
+                "rating" : 5.0
+            }
+        },
+        {
+            "model":"IamCodeAddicted_Base.movie",
+            "pk" : 4,
+            "fields":{
+                "name" : "AVENGERS: WOJNA BEZ GRANIC",
+                "description" : "Potężny Thanos zbiera Kamienie Nieskończoności w celu narzucenia swojej woli wszystkim istnieniom we wszechświecie. Tylko drużyna superbohaterów znanych jako Avengers może go powstrzymać.",
+                "date_of_release" : "2021-09-06T21:00:00.000Z",
+                "image_url" : "https:\/\/thumbor.forbes.com\/thumbor\/fit-in\/1200x0\/filters%3Aformat%28jpg%29\/https%3A%2F%2Fblogs-images.forbes.com%2Fmarkhughes%2Ffiles%2F2018%2F04%2FDOLBY-Exclusive-AVENGERS-INFINITY-WAR-poster-1-1200x1753.jpg",
+                "added_by_id" : null,
+                "price" : 19.0,
+                "rating" : 5.0
+            }
+        },
+        {
+            "model":"IamCodeAddicted_Base.movie",
+            "pk" : 5,
+            "fields":{
+                "name" : "AVENGERS: KONIEC GRY",
+                "description" : "Po wymazaniu połowy życia we Wszechświecie przez Thanosa Avengersi starają się zrobić wszystko, co konieczne, aby pokonać szalonego tytana.",
+                "date_of_release" : "2021-09-07T20:00:00.000Z",
+                "image_url" : "https:\/\/i.pinimg.com\/736x\/d2\/4c\/52\/d24c52387e356222b81065a49e151fd5.jpg",
+                "added_by_id" : null,
+                "price" : 19.0,
+                "rating" : 5.0
+            }
+        },
+        {
+            "model":"IamCodeAddicted_Base.movie",
+            "pk" : 6,
+            "fields":{
+                "name" : "CAPTAIN AMERICA: PIERWSZE STARCIE",
+                "description" : "Druga wojna światowa. Steve Rogers stara się zaciągnąć do wojska, ale jego słaba postura go dyskwalifikuje. Tajny eksperyment czyni z niego siłacza zdolnego pokonać nazistów.",
+                "date_of_release" : "2021-05-07T19:00:00.000Z",
+                "image_url" : "https:\/\/collpker.com\/wp-content\/uploads\/captain-america-first-avenger-international-poster-01.jpg",
+                "added_by_id" : null,
+                "price" : 19.0,
+                "rating" : 5.0
+            }
+        }
+]
+    
