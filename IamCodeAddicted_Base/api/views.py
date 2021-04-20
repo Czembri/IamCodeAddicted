@@ -16,8 +16,11 @@ class MoviesPurchaseApiView(APIView):
 
 
     def get(self, request,*args, **kwargs):
-        user_purchase = MoviesPurchase.objects.filter(user_id=request.user.id)
-        logger.debug(f'Database query result: [{user_purchase}]')
+        try:
+            user_purchase = MoviesPurchase.objects.filter(user_id=request.user.id)
+            logger.debug(f'Database query result: [{user_purchase}]')
+        except Exception as err:
+            logger.error(f"Domething went wrong: [{err}]")
         if not user_purchase:
             return Response(
                 {"res":"Object does not exist or is not accessible"},
@@ -35,7 +38,11 @@ class MoviesPurchaseApiView(APIView):
             'movie':request.data.get('movie'),
             'user':request.user.id
         }
-        movies = Movie.objects.get(id=data['movie'])
+        try:
+            movies = Movie.objects.get(id=data['movie'])
+            logger.debug(f'Database query result: [{movies}]')
+        except Exception as err:
+            logger.error(f"Domething went wrong: [{err}]")
         data['movies'] = movies.__dict__
         logger.debug(f'Data: [{data}]')
         serializer = MoviePurchaseSerializer(data=data)
@@ -54,7 +61,11 @@ class MoviePurchaseUserApi(APIView):
 
 
     def get(self, request, movie_id, *args, **kwargs):
-        user_purchase = MoviesPurchase.objects.get(movie_id=movie_id, user_id=request.user.id)
+        try:
+            user_purchase = MoviesPurchase.objects.get(movie_id=movie_id, user_id=request.user.id)
+            logger.debug(f'Database query result: [{user_purchase}]')
+        except Exception as err:
+            logger.error(f"Domething went wrong: [{err}]")
         if not user_purchase:
             return Response(
                 {"res":"Object does not exist or is not accessible"},

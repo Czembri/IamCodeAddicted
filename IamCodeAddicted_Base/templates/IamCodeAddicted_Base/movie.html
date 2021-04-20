@@ -77,6 +77,9 @@ $('#buy').on('click' ,function(e) {
       complete:function(xhr, textStatus){
         if (xhr.status == 500){
           alert("Już to kupiłeś głąbie!");
+        } else if (xhr.status == 201){
+          alert("Ulalala dobry wybór");
+          window.location.href = '/bought/';
         }
       }
   });
