@@ -95,10 +95,12 @@ You need to have installed python 3.8 > and postgres database (better for you to
 4. Create app_config.ini file and fill it with suitable data.
    ```ini
    [DATABASE]
-    login = 
+    engine = 
+    name = 
+    user = 
     password = 
-    url = 
-    db = 
+    host = 
+    port = 
    ```
 5. Upgrade Your database using:
   ```sh
