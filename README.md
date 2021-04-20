@@ -188,6 +188,8 @@ method: DELETE
 
 '/movie/<int:pk>/' - movie details
 
+'/buy/' - buy ticket
+
 <!-- ROADMAP -->
 ## Roadmap
 
