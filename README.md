@@ -177,10 +177,15 @@ method: DELETE
 [ APP ]
 
 '/' - main page
+
 '/login/' - login page 
+
 '/register/' -register page
+
 '/logout/' - session cleared, logout page
+
 '/bought/' - bought tickets
+
 '/movie/<int:pk>/' - movie details
 
 <!-- ROADMAP -->
