@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import configparser
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,14 +79,27 @@ WSGI_APPLICATION = 'IamCodeAddicted_MoviesManager_Application.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+config =configparser.ConfigParser()
+with open('IamCodeAddicted_MoviesManager_Application/app_config.ini', 'r', encoding='utf-8') as f:
+    config.read_file(f)
+    db_config = {
+        'engine':config['DATABASE']['engine'],
+        'name':config['DATABASE']['name'],
+        'user':config['DATABASE']['user'],
+        'password':config['DATABASE']['password'],
+        'host':config['DATABASE']['host'],
+        'port':config['DATABASE']['port']
+    }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test_migrate',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': db_config['engine'],
+        'NAME': db_config['name'],
+        'USER': db_config['user'],
+        'PASSWORD': db_config['password'],
+        'HOST': db_config['host'],
+        'PORT': db_config['port'],
     }
 }
 
