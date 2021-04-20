@@ -191,6 +191,7 @@ AUTH_USER_MODEL = 'IamCodeAddicted_Base.CustomUser'
 AUTHENTICATION_BACKENDS = ['IamCodeAddicted_Base.backends.EmailBackend'] # new
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True

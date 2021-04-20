@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block app %}
+
+<div class="row justify-content-center">
+    <div class="col d-flex justify-content-center"> 
+        <div class="card">
+          <div class="card-body">
+           <form action="" method="post">
+             {% csrf_token %}
+             <select class="form-select" name="movie" id="movie" aria-label="Default select example">
+             {% for m in model %}
+                <option value="{{ m.id }}" >{{ m.name }} | {{ m.price }}</option>
+             {% endfor %}
+            </select>
+            <button class="btn btn-secondary" type="submit" id="submit">Kup</button>
+           </form> 
+          </div>
+        </div>
+     </div>
+</div>
+
+
+
+  {% endblock %}
