@@ -3,27 +3,35 @@
 {% block app %}
 <div class="row justify-content-center" style="margin-top: 100px;">
     <div class="col d-flex justify-content-center">
-        <form action="{% url 'register' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" id="submit">Register</button>
-          </form>
-        <!-- <form id="reg" action=" {% url 'register' %">
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter username">
+          <div class="card">
+            <div class="card-body">
+              <form method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                    <label>{{form.email.label}}</label>
+                    {{form.email}}
+                  </div>
+                  <div class="row">
+                    <label>{{form.username.label}}</label>
+                    {{form.username}}
+                  </div>
+                  <div class="row">
+                    <label>{{form.password1.label}}</label>
+                    {{form.password1}}
+                  </div>
+                  <div class="row">
+                  <label>{{form.password2.label}}</label>
+                  {{form.password2}}
+                  </div>
+                  <div class="row">
+                    <input style="margin-top:10px ;" class="btn btn-secondary" type="submit" value="Register">
+                  </div>
+              </form>
+              <div class="card-footer">
+                <small>Already have an account? <a href="{% url 'login' %}">Login</a></small>
               </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-            <button id="sub" type="submit" class="btn btn-primary">Submit</button>
-          </form> -->
+          </div>        
+        </div>
     </div>
 </div>
 {% endblock %}
